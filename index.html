@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Awesome Quotes App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Quotes from quotes.json</h1>
+  <div class="quote-container" id="output">Loading quotes...</div>
+
+  <script>
+    fetch('./quotes/quotes.json')
+      .then(response => response.json())
+      .then(data => {
+        const container = document.getElementById('output');
+        container.innerHTML = ''; // Clear "Loading..." text
+        data.forEach(quote => {
+          const card = document.createElement('div');
+          card.className = 'quote-card';
+
+          card.innerHTML = `
+            <div class="quote-text">"${quote.quote}"</div>
+            <div class="quote-author">– ${quote.author}</div>
+          `;
+          container.appendChild(card);
+        });
+      })
+      .catch(err => {
+        document.getElementById('output').textContent = 'Failed to load quotes.';
+        console.error(err);
+      });
+  </script>
+</body>
+</html>
