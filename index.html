@@ -10,7 +10,7 @@
   <div class="quote-container" id="output">Loading quotes...</div>
 
   <script>
-    fetch('./quotes/quotes.json')
+    fetch('quotes.json')
       .then(response => response.json())
       .then(data => {
         const container = document.getElementById('output');
